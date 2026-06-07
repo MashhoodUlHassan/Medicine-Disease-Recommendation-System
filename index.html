@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Healthcare Medicine & Disease Prediction System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            color: #1a202c;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══════════════════ NAVBAR ══════════════════ -->
+    <nav style="
+        background: linear-gradient(90deg, #0a2540 0%, #1a3a5c 100%);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 0;
+    " class="navbar navbar-expand-lg navbar-dark">
+
+        <div class="container" style="padding: 14px 20px;">
+
+            <a class="navbar-brand" href="#" style="
+                font-weight: 800;
+                font-size: 1.3rem;
+                letter-spacing: -0.3px;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                text-decoration: none;
+            ">
+                <span style="
+                    background: linear-gradient(135deg, #00c6ff, #0072ff);
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1rem;
+                    box-shadow: 0 4px 12px rgba(0,114,255,0.4);
+                "><i class="fas fa-heart-pulse"></i></span>
+                AI Healthcare
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                style="border: none; outline: none; box-shadow: none;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" style="gap: 4px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"
+                            style="color: rgba(255,255,255,0.85); font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.2s;"
+                            onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#fff';"
+                            onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)';">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about"
+                            style="color: rgba(255,255,255,0.85); font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.2s;"
+                            onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#fff';"
+                            onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)';">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#developer"
+                            style="color: rgba(255,255,255,0.85); font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.2s;"
+                            onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#fff';"
+                            onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)';">Developer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog"
+                            style="color: rgba(255,255,255,0.85); font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.2s;"
+                            onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.color='#fff';"
+                            onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.85)';">Blog</a>
+                    </li>
+                    <li class="nav-item" style="margin-left: 8px;">
+                        <a href="#contact" style="
+                            background: linear-gradient(135deg, #00c6ff, #0072ff);
+                            color: white;
+                            font-weight: 600;
+                            padding: 9px 22px;
+                            border-radius: 8px;
+                            text-decoration: none;
+                            font-size: 0.9rem;
+                            box-shadow: 0 4px 12px rgba(0,114,255,0.35);
+                            transition: all 0.2s;
+                            display: inline-block;
+                        " onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 18px rgba(0,114,255,0.5)';"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,114,255,0.35)';">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══════════════════ HERO ══════════════════ -->
+    <section style="
+        background: linear-gradient(135deg, #0a2540 0%, #0d47a1 50%, #0288d1 100%);
+        padding: 120px 0 100px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- decorative circles -->
+        <div
+            style="position:absolute;top:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;">
+        </div>
+        <div
+            style="position:absolute;bottom:-100px;right:-60px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,0.03);pointer-events:none;">
+        </div>
+
+        <div class="container" style="position:relative;z-index:1; animation: fadeInUp 0.8s ease both;">
+
+            <div style="
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(255,255,255,0.12);
+                border: 1px solid rgba(255,255,255,0.2);
+                color: #90caf9;
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                padding: 7px 18px;
+                border-radius: 50px;
+                margin-bottom: 28px;
+            ">
+                <i class="fas fa-circle-check" style="color: #4caf50; font-size: 0.75rem;"></i>
+                Powered by Artificial Intelligence
+            </div>
+
+            <h1 style="
+                font-size: clamp(2rem, 5vw, 3.6rem);
+                font-weight: 800;
+                color: #ffffff;
+                line-height: 1.15;
+                margin-bottom: 20px;
+                letter-spacing: -1px;
+            ">
+                Medicine & Disease Prediction<br>
+                <span style="
+                    background: linear-gradient(90deg, #00c6ff, #80d8ff);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                ">System</span>
+            </h1>
+
+            <p style="
+                font-size: 1.15rem;
+                color: rgba(255,255,255,0.75);
+                max-width: 560px;
+                margin: 0 auto 40px;
+                line-height: 1.7;
+                font-weight: 400;
+            ">
+                Predict medicines & diseases using Artificial Intelligence, Machine Learning
+                and Healthcare Analytics fast, accurate, and free.
+            </p>
+
+            <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+                <a href="#prediction" style="
+                    background: linear-gradient(135deg, #00c6ff, #0072ff);
+                    color: white;
+                    font-weight: 700;
+                    font-size: 1rem;
+                    padding: 14px 36px;
+                    border-radius: 10px;
+                    text-decoration: none;
+                    box-shadow: 0 6px 20px rgba(0,114,255,0.45);
+                    transition: all 0.25s;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 28px rgba(0,114,255,0.55)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0,114,255,0.45)';">
+                    <i class="fas fa-stethoscope"></i> Predict Now
+                </a>
+                <a href="#about" style="
+                    background: rgba(255,255,255,0.1);
+                    color: white;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    padding: 14px 36px;
+                    border-radius: 10px;
+                    text-decoration: none;
+                    border: 1px solid rgba(255,255,255,0.25);
+                    transition: all 0.25s;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                " onmouseover="this.style.background='rgba(255,255,255,0.18)';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.1)';">
+                    <i class="fas fa-circle-info"></i> Learn More
+                </a>
+            </div>
+
+            <!-- Stats Row -->
+            <div style="
+                display: flex;
+                gap: 40px;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 70px;
+                padding-top: 40px;
+                border-top: 1px solid rgba(255,255,255,0.12);
+            ">
+                <div style="text-align:center;">
+                    <div style="font-size:1.9rem;font-weight:800;color:#fff;">100%</div>
+                    <div
+                        style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:4px;text-transform:uppercase;letter-spacing:0.8px;">
+                        Accuracy</div>
+                </div>
+                <div style="width:1px;background:rgba(255,255,255,0.12);"></div>
+                <div style="text-align:center;">
+                    <div style="font-size:1.9rem;font-weight:800;color:#fff;">40+</div>
+                    <div
+                        style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:4px;text-transform:uppercase;letter-spacing:0.8px;">
+                        Diseases</div>
+                </div>
+                <div style="width:1px;background:rgba(255,255,255,0.12);"></div>
+                <div style="text-align:center;">
+                    <div style="font-size:1.9rem;font-weight:800;color:#fff;">Real‑Time</div>
+                    <div
+                        style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:4px;text-transform:uppercase;letter-spacing:0.8px;">
+                        Prediction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ PREDICTION FORM ══════════════════ -->
+    <section id="prediction" style="padding: 80px 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+
+                    <div style="
+                        background: #ffffff;
+                        border-radius: 24px;
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.10);
+                        overflow: hidden;
+                    ">
+                        <!-- Card Header -->
+                        <div style="
+                            background: linear-gradient(135deg, #0a2540, #0d47a1);
+                            padding: 36px 48px 32px;
+                            text-align: center;
+                        ">
+                            <div style="
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 64px;
+                                height: 64px;
+                                background: rgba(255,255,255,0.15);
+                                border-radius: 18px;
+                                margin-bottom: 16px;
+                                font-size: 1.6rem;
+                                color: #fff;
+                            "><i class="fas fa-stethoscope"></i></div>
+                            <h2 style="color:#fff;font-weight:800;font-size:1.8rem;margin-bottom:8px;">Medicine &
+                                Disease
+                                Prediction</h2>
+                            <p style="color:rgba(255,255,255,0.7);font-size:0.95rem;margin:0;">Enter your symptoms below
+                                and let our AI diagnose potential conditions</p>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div style="padding: 48px;">
+                            <form action="/predict" method="post">
+
+                                <div style="margin-bottom: 28px;">
+                                    <label style="
+                                        display: block;
+                                        font-weight: 700;
+                                        font-size: 0.9rem;
+                                        color: #374151;
+                                        margin-bottom: 10px;
+                                        letter-spacing: 0.3px;
+                                    ">
+                                        <i class="fas fa-notes-medical" style="color:#0072ff;margin-right:8px;"></i>
+                                        Describe Your Symptoms
+                                    </label>
+
+                                    <textarea name="symptoms" rows="5" required
+                                        placeholder="e.g. itching, skin_rash, headache, fatigue, fever..." style="
+                                            width: 100%;
+                                            border: 2px solid #e2e8f0;
+                                            border-radius: 12px;
+                                            padding: 16px 20px;
+                                            font-size: 0.97rem;
+                                            color: #374151;
+                                            font-family: 'Inter', sans-serif;
+                                            resize: vertical;
+                                            transition: border-color 0.2s, box-shadow 0.2s;
+                                            outline: none;
+                                            background: #f8fafc;
+                                        "
+                                        onfocus="this.style.borderColor='#0072ff'; this.style.boxShadow='0 0 0 4px rgba(0,114,255,0.1)'; this.style.background='#fff';"
+                                        onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'; this.style.background='#f8fafc';"></textarea>
+
+                                    <div style="
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 6px;
+                                        margin-top: 10px;
+                                        color: #64748b;
+                                        font-size: 0.82rem;
+                                    ">
+                                        <i class="fas fa-circle-info" style="color:#0072ff;"></i>
+                                        Separate multiple symptoms with commas for best results.
+                                    </div>
+                                </div>
+
+                                <div style="text-align:center;">
+                                    <button type="submit" style="
+                                        background: linear-gradient(135deg, #0072ff, #00c6ff);
+                                        color: white;
+                                        border: none;
+                                        padding: 15px 48px;
+                                        border-radius: 12px;
+                                        font-size: 1rem;
+                                        font-weight: 700;
+                                        cursor: pointer;
+                                        box-shadow: 0 6px 20px rgba(0,114,255,0.4);
+                                        transition: all 0.25s;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                        font-family: 'Inter', sans-serif;
+                                        letter-spacing: 0.3px;
+                                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 28px rgba(0,114,255,0.5)';"
+                                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0,114,255,0.4)';">
+                                        <i class="fas fa-magnifying-glass-plus"></i>
+                                        Analyze & Predict
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ══════════════════ PREDICTION RESULTS ══════════════════ -->
+    {% if predicted_disease %}
+    <section style="padding: 20px 0 80px; background: #f8fafc;">
+        <div class="container">
+
+            <div style="text-align:center;margin-bottom:40px;">
+                <h2 style="font-size:2rem;font-weight:800;color:#0a2540;">Prediction Results</h2>
+            </div>
+
+            <div style="
+                background:#fff;
+                border-radius:24px;
+                box-shadow:0 12px 40px rgba(0,0,0,0.09);
+                overflow:hidden;
+            ">
+                <!-- Result Header -->
+                <div style="
+                    background:linear-gradient(135deg,#fff1f2,#fce7f3);
+                    border-bottom:2px solid #fecdd3;
+                    padding:32px 48px;
+                    display:flex;
+                    align-items:center;
+                    gap:20px;
+                ">
+                    <div style="
+                        width:60px;height:60px;
+                        background:#dc2626;
+                        border-radius:16px;
+                        display:flex;align-items:center;justify-content:center;
+                        font-size:1.4rem;color:#fff;
+                        flex-shrink:0;
+                    "><i class="fas fa-virus"></i></div>
+                    <div>
+                        <div
+                            style="font-size:0.8rem;font-weight:700;color:#dc2626;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">
+                            Predicted Disease</div>
+                        <div style="font-size:1.7rem;font-weight:800;color:#0a2540;">{{ predicted_disease }}</div>
+                    </div>
+                </div>
+
+                <!-- Result Body -->
+                <div style="padding:40px 48px;">
+
+                    <!-- Description -->
+                    <div style="margin-bottom:36px;">
+                        <h4
+                            style="font-weight:700;color:#0a2540;font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+                            <span
+                                style="width:36px;height:36px;background:#eff6ff;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:#0072ff;font-size:0.85rem;">
+                                <i class="fas fa-file-medical"></i>
+                            </span>
+                            Description
+                        </h4>
+                        <p
+                            style="color:#475569;line-height:1.75;font-size:0.97rem;margin:0;padding:20px;background:#f8fafc;border-radius:12px;border-left:4px solid #0072ff;">
+                            {{ dis_des }}</p>
+                    </div>
+
+                    <div style="height:1px;background:#f1f5f9;margin-bottom:36px;"></div>
+
+                    <!-- Precautions -->
+                    <div style="margin-bottom:36px;">
+                        <h4
+                            style="font-weight:700;color:#0a2540;font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+                            <span
+                                style="width:36px;height:36px;background:#fef3c7;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:#d97706;font-size:0.85rem;">
+                                <i class="fas fa-triangle-exclamation"></i>
+                            </span>
+                            Precautions
+                        </h4>
+                        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                            {% for precaution in my_precautions %}
+                            <li style="
+                                display:flex;align-items:center;gap:12px;
+                                padding:12px 18px;
+                                background:#fffbeb;
+                                border-radius:10px;
+                                font-size:0.93rem;
+                                color:#374151;
+                            ">
+                                <i class="fas fa-check-circle" style="color:#d97706;flex-shrink:0;"></i>
+                                {{ precaution }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div style="height:1px;background:#f1f5f9;margin-bottom:36px;"></div>
+
+                    <!-- Medications -->
+                    <div style="margin-bottom:36px;">
+                        <h4
+                            style="font-weight:700;color:#0a2540;font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+                            <span
+                                style="width:36px;height:36px;background:#fee2e2;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:#dc2626;font-size:0.85rem;">
+                                <i class="fas fa-pills"></i>
+                            </span>
+                            Medications
+                        </h4>
+                        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                            {% for medicine in medications %}
+                            <li style="
+                                display:flex;align-items:center;gap:12px;
+                                padding:12px 18px;
+                                background:#fff1f2;
+                                border-radius:10px;
+                                font-size:0.93rem;
+                                color:#374151;
+                            ">
+                                <i class="fas fa-capsules" style="color:#dc2626;flex-shrink:0;"></i>
+                                {{ medicine }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div style="height:1px;background:#f1f5f9;margin-bottom:36px;"></div>
+
+                    <!-- Diet -->
+                    <div style="margin-bottom:36px;">
+                        <h4
+                            style="font-weight:700;color:#0a2540;font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+                            <span
+                                style="width:36px;height:36px;background:#d1fae5;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:#059669;font-size:0.85rem;">
+                                <i class="fas fa-apple-whole"></i>
+                            </span>
+                            Recommended Diet
+                        </h4>
+                        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                            {% for diet in my_diet %}
+                            <li style="
+                                display:flex;align-items:center;gap:12px;
+                                padding:12px 18px;
+                                background:#f0fdf4;
+                                border-radius:10px;
+                                font-size:0.93rem;
+                                color:#374151;
+                            ">
+                                <i class="fas fa-leaf" style="color:#059669;flex-shrink:0;"></i>
+                                {{ diet }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div style="height:1px;background:#f1f5f9;margin-bottom:36px;"></div>
+
+                    <!-- Workout -->
+                    <div>
+                        <h4
+                            style="font-weight:700;color:#0a2540;font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+                            <span
+                                style="width:36px;height:36px;background:#ede9fe;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:#7c3aed;font-size:0.85rem;">
+                                <i class="fas fa-dumbbell"></i>
+                            </span>
+                            Workout Recommendations
+                        </h4>
+                        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                            {% for exercise in workout %}
+                            <li style="
+                                display:flex;align-items:center;gap:12px;
+                                padding:12px 18px;
+                                background:#faf5ff;
+                                border-radius:10px;
+                                font-size:0.93rem;
+                                color:#374151;
+                            ">
+                                <i class="fas fa-person-running" style="color:#7c3aed;flex-shrink:0;"></i>
+                                {{ exercise }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ FEATURES ══════════════════ -->
+    <section style="padding: 20px 0 80px;">
+        <div class="container">
+
+            <div style="text-align:center;margin-bottom:50px;">
+                <div style="
+                    display:inline-block;
+                    background:#eff6ff;
+                    color:#0072ff;
+                    font-size:0.8rem;
+                    font-weight:700;
+                    letter-spacing:1.2px;
+                    text-transform:uppercase;
+                    padding:6px 18px;
+                    border-radius:50px;
+                    margin-bottom:16px;
+                ">Why Choose Us</div>
+                <h2 style="font-size:2rem;font-weight:800;color:#0a2540;letter-spacing:-0.5px;">Built for Accuracy &amp;
+                    Ease</h2>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Feature 1 -->
+                <div class="col-md-3">
+                    <div style="
+                        background: #fff;
+                        border-radius: 20px;
+                        padding: 36px 28px;
+                        text-align: center;
+                        height: 100%;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+                        border: 1px solid #f1f5f9;
+                        transition: all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(0,114,255,0.12)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
+                        <div style="
+                            width:66px;height:66px;
+                            background:linear-gradient(135deg,#e8f4ff,#d0e9ff);
+                            border-radius:18px;
+                            display:flex;align-items:center;justify-content:center;
+                            margin:0 auto 20px;
+                            font-size:1.6rem;color:#0072ff;
+                        "><i class="fas fa-brain"></i></div>
+                        <h5 style="font-weight:700;color:#0a2540;margin-bottom:10px;">AI Powered</h5>
+                        <p style="color:#64748b;font-size:0.9rem;line-height:1.65;margin:0;">Advanced Machine Learning
+                            models deliver accurate, real-time predictions.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="col-md-3">
+                    <div style="
+                        background: #fff;
+                        border-radius: 20px;
+                        padding: 36px 28px;
+                        text-align: center;
+                        height: 100%;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+                        border: 1px solid #f1f5f9;
+                        transition: all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(16,185,129,0.12)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
+                        <div style="
+                            width:66px;height:66px;
+                            background:linear-gradient(135deg,#d1fae5,#a7f3d0);
+                            border-radius:18px;
+                            display:flex;align-items:center;justify-content:center;
+                            margin:0 auto 20px;
+                            font-size:1.6rem;color:#059669;
+                        "><i class="fas fa-user-doctor"></i></div>
+                        <h5 style="font-weight:700;color:#0a2540;margin-bottom:10px;">Healthcare Insights</h5>
+                        <p style="color:#64748b;font-size:0.9rem;line-height:1.65;margin:0;">Instant disease analysis
+                            based on your reported symptoms.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-md-3">
+                    <div style="
+                        background: #fff;
+                        border-radius: 20px;
+                        padding: 36px 28px;
+                        text-align: center;
+                        height: 100%;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+                        border: 1px solid #f1f5f9;
+                        transition: all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(239,68,68,0.12)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
+                        <div style="
+                            width:66px;height:66px;
+                            background:linear-gradient(135deg,#fee2e2,#fecaca);
+                            border-radius:18px;
+                            display:flex;align-items:center;justify-content:center;
+                            margin:0 auto 20px;
+                            font-size:1.6rem;color:#dc2626;
+                        "><i class="fas fa-pills"></i></div>
+                        <h5 style="font-weight:700;color:#0a2540;margin-bottom:10px;">Recommendations</h5>
+                        <p style="color:#64748b;font-size:0.9rem;line-height:1.65;margin:0;">Medication, diet and
+                            precaution suggestions tailored to your condition.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="col-md-3">
+                    <div style="
+                        background: #fff;
+                        border-radius: 20px;
+                        padding: 36px 28px;
+                        text-align: center;
+                        height: 100%;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+                        border: 1px solid #f1f5f9;
+                        transition: all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(245,158,11,0.12)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
+                        <div style="
+                            width:66px;height:66px;
+                            background:linear-gradient(135deg,#fef3c7,#fde68a);
+                            border-radius:18px;
+                            display:flex;align-items:center;justify-content:center;
+                            margin:0 auto 20px;
+                            font-size:1.6rem;color:#d97706;
+                        "><i class="fas fa-shield-heart"></i></div>
+                        <h5 style="font-weight:700;color:#0a2540;margin-bottom:10px;">Health Awareness</h5>
+                        <p style="color:#64748b;font-size:0.9rem;line-height:1.65;margin:0;">Learn preventive measures
+                            and lifestyle changes for better health.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {% endif %}
+
+    <!-- ══════════════════ ABOUT ══════════════════ -->
+    <section id="about" style="padding: 80px 0; background: #fff;">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5">
+                    <div style="
+                        background: linear-gradient(135deg, #0a2540, #0d47a1);
+                        border-radius: 24px;
+                        padding: 48px 40px;
+                        color: white;
+                        text-align: center;
+                        box-shadow: 0 20px 50px rgba(13,71,161,0.35);
+                    ">
+                        <i class="fas fa-hospital" style="font-size:3.5rem;margin-bottom:20px;opacity:0.9;"></i>
+                        <h3 style="font-weight:800;font-size:1.5rem;margin-bottom:14px;">Health Care Center</h3>
+                        <p style="color:rgba(255,255,255,0.75);line-height:1.7;font-size:0.95rem;margin:0;">
+                            AI-powered, community driven, always evolving — our platform is built to put health
+                            intelligence in your hands.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div style="
+                        display:inline-block;
+                        background:#eff6ff;
+                        color:#0072ff;
+                        font-size:0.8rem;
+                        font-weight:700;
+                        letter-spacing:1.2px;
+                        text-transform:uppercase;
+                        padding:6px 18px;
+                        border-radius:50px;
+                        margin-bottom:16px;
+                    ">About Us</div>
+                    <h2
+                        style="font-size:1.9rem;font-weight:800;color:#0a2540;margin-bottom:20px;letter-spacing:-0.4px;">
+                        About Health Care Center</h2>
+                    <p style="color:#475569;line-height:1.8;font-size:1rem;margin-bottom:18px;">
+                        Health Care Center is an AI-powered disease prediction platform developed to help users
+                        understand possible health conditions based on symptoms. Our system delivers predictions in
+                        seconds, paired with actionable recommendations.
+                    </p>
+                    <p style="color:#475569;line-height:1.8;font-size:1rem;margin:0;">
+                        Built with Machine Learning, Flask, Python and curated healthcare datasets, it provides disease
+                        predictions along with medications, precautions, diet plans and workout recommendations.
+                    </p>
+                    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:30px;">
+                        <div
+                            style="display:flex;align-items:center;gap:8px;color:#374151;font-size:0.9rem;font-weight:600;">
+                            <i class="fas fa-check-circle" style="color:#0072ff;"></i> Machine Learning
+                        </div>
+                        <div
+                            style="display:flex;align-items:center;gap:8px;color:#374151;font-size:0.9rem;font-weight:600;">
+                            <i class="fas fa-check-circle" style="color:#0072ff;"></i> Python & Flask
+                        </div>
+                        <div
+                            style="display:flex;align-items:center;gap:8px;color:#374151;font-size:0.9rem;font-weight:600;">
+                            <i class="fas fa-check-circle" style="color:#0072ff;"></i> Healthcare Datasets
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ DEVELOPER ══════════════════ -->
+    <section id="developer" style="padding: 80px 0; background: #f8fafc;">
+        <div class="container">
+
+            <div style="text-align:center;margin-bottom:50px;">
+                <div style="
+                    display:inline-block;
+                    background:#eff6ff;
+                    color:#0072ff;
+                    font-size:0.8rem;
+                    font-weight:700;
+                    letter-spacing:1.2px;
+                    text-transform:uppercase;
+                    padding:6px 18px;
+                    border-radius:50px;
+                    margin-bottom:16px;
+                ">Developer</div>
+                <h2 style="font-size:2rem;font-weight:800;color:#0a2540;letter-spacing:-0.5px;">Meet the Developer</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div style="
+                        background:#fff;
+                        border-radius:24px;
+                        box-shadow:0 12px 40px rgba(0,0,0,0.09);
+                        overflow:hidden;
+                    ">
+                        <div style="height:8px;background:linear-gradient(90deg,#0072ff,#00c6ff);"></div>
+                        <div style="padding:48px;text-align:center;">
+                            <img src="{{ url_for('static', filename='mashhood.png') }}" style="
+                                    width:130px;height:130px;
+                                    border-radius:50%;
+                                    object-fit:cover;
+                                    border:5px solid #eff6ff;
+                                    box-shadow:0 8px 24px rgba(0,114,255,0.2);
+                                    margin-bottom:24px;
+                                " alt="Developer Photo">
+                            <h3 style="font-weight:800;font-size:1.5rem;color:#0a2540;margin-bottom:8px;">M. Mashhood Ul
+                                Hassan</h3>
+                            <p style="
+                                color:#0072ff;
+                                font-weight:600;
+                                font-size:0.85rem;
+                                letter-spacing:0.5px;
+                                margin-bottom:20px;
+                            ">AI Engineer &nbsp;·&nbsp; ML Engineer &nbsp;·&nbsp; Python Developer</p>
+                            <p
+                                style="color:#64748b;line-height:1.75;max-width:460px;margin:0 auto 28px;font-size:0.95rem;">
+                                Passionate about Artificial Intelligence, Machine Learning, Deep Learning, Computer
+                                Vision and Healthcare Technology.
+                            </p>
+                            <div style="display:flex;justify-content:center;gap:12px;">
+                                <a href="https://www.linkedin.com/in/muhammad-mashhood-ul-hassan-986b06365/" style="
+                                    width:42px;height:42px;
+                                    background:#eff6ff;
+                                    border-radius:12px;
+                                    display:flex;align-items:center;justify-content:center;
+                                    color:#0072ff;
+                                    text-decoration:none;
+                                    font-size:1rem;
+                                    transition:all 0.2s;
+                                " onmouseover="this.style.background='#0072ff';this.style.color='#fff';"
+                                    onmouseout="this.style.background='#eff6ff';this.style.color='#0072ff';"><i
+                                        class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/MashhoodUlHassan" style="
+                                    width:42px;height:42px;
+                                    background:#eff6ff;
+                                    border-radius:12px;
+                                    display:flex;align-items:center;justify-content:center;
+                                    color:#0072ff;
+                                    text-decoration:none;
+                                    font-size:1rem;
+                                    transition:all 0.2s;
+                                " onmouseover="this.style.background='#0072ff';this.style.color='#fff';"
+                                    onmouseout="this.style.background='#eff6ff';this.style.color='#0072ff';"><i
+                                        class="fab fa-github"></i></a>
+                                <a href="https://www.instagram.com/mashhood_ul_hassan/" style="
+                                    width:42px;height:42px;
+                                    background:#eff6ff;
+                                    border-radius:12px;
+                                    display:flex;align-items:center;justify-content:center;
+                                    color:#0072ff;
+                                    text-decoration:none;
+                                    font-size:1rem;
+                                    transition:all 0.2s;
+                                " onmouseover="this.style.background='#0072ff';this.style.color='#fff';"
+                                    onmouseout="this.style.background='#eff6ff';this.style.color='#0072ff';"><i
+                                        class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ BLOG ══════════════════ -->
+    <section id="blog" style="padding: 80px 0; background: #fff;">
+        <div class="container">
+
+            <div style="text-align:center;margin-bottom:50px;">
+                <div style="
+                    display:inline-block;
+                    background:#eff6ff;
+                    color:#0072ff;
+                    font-size:0.8rem;
+                    font-weight:700;
+                    letter-spacing:1.2px;
+                    text-transform:uppercase;
+                    padding:6px 18px;
+                    border-radius:50px;
+                    margin-bottom:16px;
+                ">Blog</div>
+                <h2 style="font-size:2rem;font-weight:800;color:#0a2540;letter-spacing:-0.5px;">Latest Healthcare
+                    Insights</h2>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Blog 1 -->
+                <div class="col-md-4">
+                    <div style="
+                        background:#fff;
+                        border-radius:20px;
+                        box-shadow:0 4px 20px rgba(0,0,0,0.07);
+                        border:1px solid #f1f5f9;
+                        overflow:hidden;
+                        height:100%;
+                        transition:all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 40px rgba(0,114,255,0.12)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
+                        <div
+                            style="background:linear-gradient(135deg,#0a2540,#0d47a1);padding:28px;display:flex;align-items:center;gap:14px;">
+                            <div
+                                style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h4 style="color:#fff;font-weight:700;font-size:1.05rem;margin:0;line-height:1.35;">AI in
+                                Healthcare</h4>
+                        </div>
+                        <div style="padding:28px;">
+                            <p style="color:#64748b;line-height:1.75;font-size:0.92rem;margin:0;">
+                                Artificial Intelligence is transforming healthcare by enabling faster diagnosis and
+                                smarter treatment recommendations, cutting response times dramatically.
+                            </p>
+                            <div style="margin-top:20px;">
+                                <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare"
+                                    style="color:#0072ff;font-weight:600;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+                                    Read More on Wikipedia<i class="fas fa-arrow-right" style="font-size:0.75rem;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="col-md-4">
+                    <div style="
+                        background:#fff;
+                        border-radius:20px;
+                        box-shadow:0 4px 20px rgba(0,0,0,0.07);
+                        border:1px solid #f1f5f9;
+                        overflow:hidden;
+                        height:100%;
+                        transition:all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 40px rgba(5,150,105,0.12)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
+                        <div
+                            style="background:linear-gradient(135deg,#064e3b,#059669);padding:28px;display:flex;align-items:center;gap:14px;">
+                            <div
+                                style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 style="color:#fff;font-weight:700;font-size:1.05rem;margin:0;line-height:1.35;">ML for
+                                Disease Prediction</h4>
+                        </div>
+                        <div style="padding:28px;">
+                            <p style="color:#64748b;line-height:1.75;font-size:0.92rem;margin:0;">
+                                Machine learning models analyze symptoms and help identify potential diseases with high
+                                efficiency, giving patients a head-start on treatment.
+                            </p>
+                            <div style="margin-top:20px;">
+                                <a href="https://premierscience.com/pjs-24-579/"
+                                    style="color:#059669;font-weight:600;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+                                    Read More on Premierscience<i class="fas fa-arrow-right"
+                                        style="font-size:0.75rem;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="col-md-4">
+                    <div style="
+                        background:#fff;
+                        border-radius:20px;
+                        box-shadow:0 4px 20px rgba(0,0,0,0.07);
+                        border:1px solid #f1f5f9;
+                        overflow:hidden;
+                        height:100%;
+                        transition:all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 40px rgba(124,58,237,0.12)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
+                        <div
+                            style="background:linear-gradient(135deg,#4c1d95,#7c3aed);padding:28px;display:flex;align-items:center;gap:14px;">
+                            <div
+                                style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0;">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h4 style="color:#fff;font-weight:700;font-size:1.05rem;margin:0;line-height:1.35;">Future
+                                of Digital Healthcare</h4>
+                        </div>
+                        <div style="padding:28px;">
+                            <p style="color:#64748b;line-height:1.75;font-size:0.92rem;margin:0;">
+                                Healthcare platforms powered by AI will improve accessibility and decision-making for
+                                patients worldwide, bridging gaps in underserved regions.
+                            </p>
+                            <div style="margin-top:20px;">
+                                <a href="https://www.linkedin.com/pulse/future-digital-healthcare-liz-kwo-md-mba-mph-fmrve/"
+                                    style="color:#7c3aed;font-weight:600;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+                                    Read More <i class="fas fa-arrow-right" style="font-size:0.75rem;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ CONTACT ══════════════════ -->
+    <section id="contact" style="padding: 80px 0; background: #f8fafc;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+
+                    <div style="
+                        background:#fff;
+                        border-radius:24px;
+                        box-shadow:0 12px 40px rgba(0,0,0,0.09);
+                        overflow:hidden;
+                        ">
+                        <div style="background:#0a2540; padding:36px 40px; text-align:center; border-radius:24px;">
+                            <i class="fas fa-envelope"
+                                style="font-size:1.8rem; color:rgba(255,255,255,0.75); display:block; margin-bottom:12px;"></i>
+                            <h2 style="color:#fff; font-weight:700; font-size:1.5rem; margin:0 0 8px;">Get in Touch</h2>
+                            <p style="color:rgba(255,255,255,0.6); margin:0 0 20px; font-size:0.88rem;">Have a question
+                                or want to collaborate? We'd love to hear from you.</p>
+
+                            <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+                                <a href="tel:03082131166" style="
+                                 display:inline-flex; align-items:center; gap:8px;
+                                 color:rgba(255,255,255,0.9); font-size:0.87rem;
+                                 text-decoration:none; background:rgba(255,255,255,0.1);
+                                 padding:9px 18px; border-radius:8px;
+                                 border:0.5px solid rgba(255,255,255,0.15);
+                             ">
+                                    <i class="fas fa-phone"></i> 0308-213-1166
+                                </a>
+                                <a href="mailto:mashhood2131@gmail.com" style="
+                                 display:inline-flex; align-items:center; gap:8px;
+                                 color:rgba(255,255,255,0.9); font-size:0.87rem;
+                                 text-decoration:none; background:rgba(255,255,255,0.1);
+                                 padding:9px 18px; border-radius:8px;
+                                 border:0.5px solid rgba(255,255,255,0.15);
+                             ">
+                                    <i class="fas fa-envelope"></i> mashhood2131@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ FOOTER ══════════════════ -->
+    <footer style="
+        background: linear-gradient(135deg, #0a2540, #0d1b2e);
+        color: white;
+        padding: 60px 0 30px;
+    ">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:40px;">
+                <div style="
+                    display:inline-flex;
+                    align-items:center;
+                    gap:12px;
+                    margin-bottom:16px;
+                ">
+                    <span style="
+                        background:linear-gradient(135deg,#00c6ff,#0072ff);
+                        width:44px;height:44px;
+                        border-radius:12px;
+                        display:flex;align-items:center;justify-content:center;
+                        font-size:1.2rem;
+                        box-shadow:0 4px 12px rgba(0,114,255,0.4);
+                    "><i class="fas fa-heart-pulse"></i></span>
+                    <h4 style="font-weight:800;font-size:1.2rem;margin:0;">AI Healthcare</h4>
+                </div>
+                <p style="color:rgba(255,255,255,0.5);font-size:0.88rem;margin-bottom:28px;letter-spacing:0.5px;">
+                    Artificial Intelligence &nbsp;•&nbsp; Machine Learning &nbsp;•&nbsp; Healthcare Technology
+                </p>
+                <div style="display:flex;justify-content:center;gap:12px;margin-bottom:36px;">
+                    <a href="https://www.instagram.com/mashhood_ul_hassan/" style="
+                        width:44px;height:44px;
+                        background:rgba(255,255,255,0.08);
+                        border-radius:12px;
+                        display:flex;align-items:center;justify-content:center;
+                        color:rgba(255,255,255,0.7);
+                        text-decoration:none;
+                        font-size:1rem;
+                        transition:all 0.2s;
+                    " onmouseover="this.style.background='#0072ff'; this.style.color='#fff';"
+                        onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.color='rgba(255,255,255,0.7)';"><i
+                            class="fab fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/in/muhammad-mashhood-ul-hassan-986b06365/" style="
+                        width:44px;height:44px;
+                        background:rgba(255,255,255,0.08);
+                        border-radius:12px;
+                        display:flex;align-items:center;justify-content:center;
+                        color:rgba(255,255,255,0.7);
+                        text-decoration:none;
+                        font-size:1rem;
+                        transition:all 0.2s;
+                    " onmouseover="this.style.background='#0072ff'; this.style.color='#fff';"
+                        onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.color='rgba(255,255,255,0.7)';"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/MashhoodUlHassan" style="
+                        width:44px;height:44px;
+                        background:rgba(255,255,255,0.08);
+                        border-radius:12px;
+                        display:flex;align-items:center;justify-content:center;
+                        color:rgba(255,255,255,0.7);
+                        text-decoration:none;
+                        font-size:1rem;
+                        transition:all 0.2s;
+                    " onmouseover="this.style.background='#333'; this.style.color='#fff';"
+                        onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.color='rgba(255,255,255,0.7)';"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/mashhood_ul_hassan/" style="
+                        width:44px;height:44px;
+                        background:rgba(255,255,255,0.08);
+                        border-radius:12px;
+                        display:flex;align-items:center;justify-content:center;
+                        color:rgba(255,255,255,0.7);
+                        text-decoration:none;
+                        font-size:1rem;
+                        transition:all 0.2s;
+                    " onmouseover="this.style.background='#e1306c'; this.style.color='#fff';"
+                        onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.color='rgba(255,255,255,0.7)';"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div
+                style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <small style="color:rgba(255,255,255,0.4);font-size:0.82rem;">
+                    © 2026 AI Healthcare Disease Prediction System. All Rights Reserved.
+                </small>
+                <small style="color:rgba(255,255,255,0.4);font-size:0.82rem;">
+                    Developed by <strong style="color:rgba(255,255,255,0.7);">M. Mashhood Ul Hassan</strong>
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Page fade in
+        window.addEventListener('load', () => {
+            document.body.style.opacity = "1";
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
